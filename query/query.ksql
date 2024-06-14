@@ -1,0 +1,12 @@
+CREATE STREAM input_test_window2 
+(rowkey STRING KEY, value INT) 
+WITH (kafka_topic='test-ksql-window', value_format='JSON');
+
+
+
+SELECT ROWKEY AS rowkey,
+       LATEST_BY_OFFSET(value) AS latest_value
+FROM input_test_window2
+WINDOW TUMBLING (SIZE 30 SECONDS)
+GROUP BY ROWKEY
+EMIT CHANGES;
