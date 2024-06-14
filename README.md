@@ -31,3 +31,20 @@ EMIT CHANGES;
 Hasilnya seperti berikut :
 ![Hasil Dari Windowing](https://github.com/muhammadfahryan/Windowing-KSQL/assets/87516915/51fb97bc-8110-4311-88c5-51e67297e271)
 
+
+Tumbling Window:
+    Ini kayak lo bikin jendela waktu yang gak overlap. Setiap jendela berdiri sendiri.
+     Berarti semua message dalam jendela 10:10:00-10:10:30 dihitung, dan jendela baru mulai dari 10:10:30-11:00:00.
+
+Hopping Window:
+    Ini kayak tumbling window, tapi ada overlapnya. Misalnya, setiap jendela juga 30 detik tapi mulai tiap 10 detik. 
+	Jadi bisa ada lebih dari satu jendela yang cover waktu yang sama.
+    Misal jendela pertama 10:10:00-10:10:30, jendela kedua 10:10:10-10:10:40, dan seterusnya. 
+	Tapi ini gak cocok kalau cuma mau hasil dari satu jendela tanpa overlap.
+
+Session Window:
+    Ini jendelanya dinamis, tergantung aktivitas. Jendela baru kebuka kalau ada message baru dan akan ditutup kalau ada periode idle (gak ada message) 
+	selama durasi tertentu.
+    Ini lebih cocok buat use case yang unpredictable, di mana kamu gak tau kapan message akan datang. 
+	Tapi kalau kamu udah tau fix durasinya 30 detik, ini gak relevan.
+
